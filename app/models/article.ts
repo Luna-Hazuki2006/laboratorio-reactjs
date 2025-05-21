@@ -1,12 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 // ts interface
-
-export interface IComment extends Document {
-    content: string;
-    publisherId: string;
-  }
-
 export interface IArticle extends Document {
     title: string;
     content: string;
@@ -15,7 +9,6 @@ export interface IArticle extends Document {
     date: string;
     idPublisher: string;
     imgUrl: string;
-    comments: IComment[];
   }
 
   // mongoose schema
@@ -28,7 +21,6 @@ const articleSchema = new Schema<IArticle>(
     date: { type: String, required: true },
     idPublisher: { type: String, required: true },
     imgUrl: { type: String, required: false },
-    comments: { type: , required: false },
   },
   { timestamps: true }
 );
