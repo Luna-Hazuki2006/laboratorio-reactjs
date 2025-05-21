@@ -7,18 +7,18 @@ export interface IUser extends Document {
     userType: number;
     firstName: string;
     lastName: string;
-  }
+}
 
-  // mongoose schema
+// mongoose schema
 const userSchema = new Schema<IUser>(
-  {
-    username: { type: String, required: true },
-    password: { type: String, required: true },
-    userType: { type: Number, required: true },
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
-  },
-  { timestamps: true }
+    {
+        username: { type: String, required: true },
+        password: { type: String, required: true },
+        userType: { type: Number, required: true },
+        firstName: { type: String, required: true },
+        lastName: { type: String, required: true },
+    },
+    { timestamps: true }
 );
 
 

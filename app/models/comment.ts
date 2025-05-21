@@ -5,17 +5,17 @@ export interface IComment extends Document {
     content: string;
     publisherId: string;
     articleId: string;
-  }
+}
 
 
 // mongoose schema
 const commentSchema = new Schema<IComment>(
-  {
-    content: { type: String, required: true },
-    publisherId: { type: String, required: true },
-    articleId: { type: String, required: true },
-  },
-  { timestamps: true }
+    {
+        content: { type: String, required: true },
+        publisherId: { type: String, required: true },
+        articleId: { type: String, required: true },
+    },
+    { timestamps: true }
 );
 
 

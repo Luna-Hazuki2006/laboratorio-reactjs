@@ -5,15 +5,15 @@ export interface IUserType extends Document {
     name: string;
     description: string;
     userType: number;
-  }
+}
 
-  // mongoose schema
+// mongoose schema
 const userTypeSchema = new Schema<IUserType>(
-  {
-    name: { type: String, required: true },
-    description: { type: String, required: false },
-  },
-  { timestamps: true }
+    {
+        name: { type: String, required: true },
+        description: { type: String, required: false },
+    },
+    { timestamps: true }
 );
 
 

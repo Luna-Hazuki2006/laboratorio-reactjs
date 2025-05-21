@@ -9,20 +9,20 @@ export interface IArticle extends Document {
     date: string;
     idPublisher: string;
     imgUrl: string;
-  }
+}
 
   // mongoose schema
 const articleSchema = new Schema<IArticle>(
-  {
-    title: { type: String, required: true },
-    content: { type: String, required: true },
-    source: { type: String, required: true },
-    category: { type: String, required: true },
-    date: { type: String, required: true },
-    idPublisher: { type: String, required: true },
-    imgUrl: { type: String, required: false },
-  },
-  { timestamps: true }
+    {
+        title: { type: String, required: true },
+        content: { type: String, required: true },
+        source: { type: String, required: true },
+        category: { type: String, required: true },
+        date: { type: String, required: true },
+        idPublisher: { type: String, required: true },
+        imgUrl: { type: String, required: false },
+    },
+    { timestamps: true }
 );
 
 
