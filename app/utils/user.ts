@@ -1,0 +1,1 @@
+// Aquí debería haber lógica para obtención de datos del usuario, ej, tipo usuario

@@ -17,6 +17,10 @@
         --background: #0a0a0a;
         --foreground: #ededed;
     }
+@theme {
+  --color-custom-yellow-100: #fbd621;
+  --color-custom-yellow-200: #ae9416;
+}
 }
 
 body {
