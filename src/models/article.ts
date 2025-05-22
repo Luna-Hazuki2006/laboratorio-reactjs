@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 // ts interface
-export interface IArticle extends Document {
+export interface IArticleDoc extends Document {
     title: string;
     content: string;
     source: string;
@@ -12,7 +12,7 @@ export interface IArticle extends Document {
 }
 
   // mongoose schema
-const articleSchema = new Schema<IArticle>(
+const articleSchema = new Schema<IArticleDoc>(
     {
         title: { type: String, required: true },
         content: { type: String, required: true },
@@ -26,4 +26,4 @@ const articleSchema = new Schema<IArticle>(
 );
 
 
-export default mongoose.models.Article || mongoose.model<IArticle>("Article", articleSchema);
+export default mongoose.models.Article || mongoose.model<IArticleDoc>("Article", articleSchema);

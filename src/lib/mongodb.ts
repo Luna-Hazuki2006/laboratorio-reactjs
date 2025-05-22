@@ -1,3 +1,4 @@
+
 import mongoose from "mongoose";
 declare global {
     var mongoose: any;
@@ -11,19 +12,12 @@ if (!cached) {
 
 async function dbConnect() {
     const MONGODB_URI = process.env.NEXT_PUBLIC_MONGODB_URI!;
-    console.log('antes del error');
-    
     
     if (!MONGODB_URI) {
         throw new Error(
             "Please define the MONGODB_URI environment variable inside .env.local",
         );
     }
-
-    console.log(MONGODB_URI);
-    
-    console.log('después del error');
-    
 
     if (cached.conn) {
         return cached.conn;

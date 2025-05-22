@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 // ts interface
-export interface IComment extends Document {
+export interface ICommentDoc extends Document {
     content: string;
     publisherId: string;
     articleId: string;
@@ -9,7 +9,7 @@ export interface IComment extends Document {
 
 
 // mongoose schema
-const commentSchema = new Schema<IComment>(
+const commentSchema = new Schema<ICommentDoc>(
     {
         content: { type: String, required: true },
         publisherId: { type: String, required: true },
@@ -19,4 +19,4 @@ const commentSchema = new Schema<IComment>(
 );
 
 
-export default mongoose.models.Comment || mongoose.model<IComment>("Comment", commentSchema);
+export default mongoose.models.Comment || mongoose.model<ICommentDoc>("Comment", commentSchema);

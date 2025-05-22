@@ -18,15 +18,15 @@
         "name": "next"
       }
     ],
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "@components/*": ["app/components/*"],
-      "@models/*": ["app/models/*"],
-      "@lib/*": ["app/lib/*"],
-      "@components/*": ["app/components/*"], 
+      "@styles/*": ["styles/*"],
+      "@models/*": ["models/*"],
+      "@lib/*": ["lib/*"],
+      "@components/*": ["components/*"], 
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/lib/mongodb.js", "app/lib/mongodb.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/lib/mongodb.js", "src/lib/mongodb.js"],
   "exclude": ["node_modules"]
 }
