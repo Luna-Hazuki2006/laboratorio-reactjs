@@ -24,3 +24,13 @@ body {
     color: var(--foreground);
     font-family: Arial, Helvetica, sans-serif;
 }
+
+label {
+
+}
+
+input {
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 20px;
+}
