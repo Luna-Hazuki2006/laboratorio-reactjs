@@ -2,13 +2,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@lib/mongodb';
 import Article from '@models/article';
+import { IArticle } from '@/types/article';
+import { Types } from 'mongoose';
 
 // get an article
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
-    const { id } = params;
+    const { id } = await params;
     await dbConnect();
-    try {     
-        const article = await Article.findOne({id});
+    try {  
+        const filter = {_id: new Types.ObjectId(id)};   
+        const article: IArticle | null = await Article.findOne(filter);
         if (!article) return NextResponse.json({ success: false, message: "Article not found" }, { status: 404 });
         return NextResponse.json({ success: true, data: article }, { status: 200 });
     } catch (error: unknown) {
@@ -23,7 +26,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
   try {
     const body = await request.json();
 
-    const updatedArticle = await Article.findByIdAndUpdate(id, body, {
+    const updatedArticle: IArticle | null = await Article.findByIdAndUpdate(id, body, {
       new: true,
       runValidators: true,
     });
@@ -44,7 +47,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
   const { id } = params;
   await dbConnect();
   try {
-    const deletedArticle = await Article.findByIdAndDelete(id);
+    const deletedArticle: IArticle | null = await Article.findByIdAndDelete(id);
     if (!deletedArticle) return NextResponse.json({ success: false, message: "Article not found" }, { status: 404 });
     return NextResponse.json({ success: true, message: "Article deleted" }, { status: 200 });
   } catch (error: unknown) {
