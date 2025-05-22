@@ -61,7 +61,8 @@ export default function CreateArticlePage() {
     <div>
       <h1>Crear Articulo</h1>
       {message && <p>{message}</p>}
-      <form onSubmit={handleSubmit}>
+      <div className='formulario'>
+        <form onSubmit={handleSubmit}>
         <input name="title" placeholder="Titulo" value={form.title} onChange={handleChange} required />
         <textarea name="content" placeholder="Contenido" value={form.content} onChange={handleChange} required />
         <input name="source" placeholder="Fuente" value={form.source} onChange={handleChange} required />
@@ -72,6 +73,7 @@ export default function CreateArticlePage() {
         <input name="idPublisher" placeholder="id autor (por motivos de prueba asi pero esto va del token cuando haya autenticacion (hola paula)" value={form.idPublisher} onChange={handleChange} required />
         <button type="submit">Crear</button>
       </form>
+      </div>
     </div>
   );
 }
