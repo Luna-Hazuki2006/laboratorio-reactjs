@@ -1,26 +1,67 @@
-'use server';
+// 'use server';
 
 // import { cookies } from "next/headers";
-import { getUser, deleteUser, hasUser } from "@lib/cookies";
-import { NextRequest, NextResponse } from "next/server";
+// import { getUser, deleteUser, hasUser } from "@lib/cookies";
+// import { NextRequest, NextResponse } from "next/server";
 
-export async function middleware(request: NextRequest) {
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+ 
+// This function can be marked `async` if using `await` inside
+export function middleware(request: NextRequest) {
+    // const { pathname } = request.nextUrl;
+    // Define the paths that need protection
+    // if (pathname == '/') {
+    //     const token = request.cookies.get('ofjwopej'); // Check for auth token in cookies
+    //     // If the token is not present, redirect to the login page
+    //     if (!token) {
+            
+    //     }
+    // }
+    // If the user is authenticated, continue with the request
+    let cookie = request.cookies.get('user')
+    console.log(cookie) // => { name: 'nextjs', value: 'fast', Path: '/' }
+    const allCookies = request.cookies.getAll()
+    console.log(allCookies) // => [{ name: 'nextjs', value: 'fast' }]
+    
+    request.cookies.has('user') // => true
+    request.cookies.delete('user')
+    request.cookies.has('user') // => false
+    
+    // Setting cookies on the response using the `ResponseCookies` API
+    const response = NextResponse.next()
+    response.cookies.set('user', 'noooooooooooo')
+    response.cookies.set({
+        name: 'user',
+        value: 'nooooooooooooooo',
+        path: '/',
+    })
+    cookie = response.cookies.get('user')
+    console.log(cookie) // => { name: 'vercel', value: 'fast', Path: '/' }
+    // The outgoing response will have a `Set-Cookie:vercel=fast;path=/` header.
+    
+    return response
 
-    const sesion = await hasUser()
-    const data = await getUser()
+// export async function middleware(request: NextRequest) {
 
-    console.log('sesion', sesion)
-    console.log('data', data);
+//     const sesion = await hasUser()
+//     const data = await getUser()
 
-    console.log('holissssssssss');
+//     console.log('sesion')
+//     console.log(sesion);
+//     console.log('data');
+//     console.log(data);
+    
+
+//     console.log('holissssssssss');
     
     
 
-    if (!sesion || data == '') {
-        const url = request.nextUrl.clone()
-        url.pathname = '/'
-        return NextResponse.redirect(url)
-    }
+//     if (!sesion || data == '') {
+//         const url = request.nextUrl.clone()
+//         url.pathname = '/login'
+//         return NextResponse.redirect(url)
+//     }
 
     // if (request.nextUrl.pathname.includes('/login')) {
     //     const url = request.nextUrl.clone()
@@ -59,6 +100,6 @@ export async function middleware(request: NextRequest) {
         // }
     // }
    
-    return NextResponse.next()
+//     return NextResponse.next()
 
 }
