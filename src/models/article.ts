@@ -7,6 +7,7 @@ export interface IArticleDoc extends Document {
     source: string;
     category: string;
     date: string;
+    namePublisher: string;
     idPublisher: string;
     imgUrl: string;
 }
@@ -19,6 +20,7 @@ const articleSchema = new Schema<IArticleDoc>(
         source: { type: String, required: true },
         category: { type: String, required: true },
         date: { type: String, required: true },
+        namePublisher: { type: String, required: true },
         idPublisher: { type: String, required: true },
         imgUrl: { type: String, required: false },
     },

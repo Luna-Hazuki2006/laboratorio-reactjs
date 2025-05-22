@@ -1,6 +1,8 @@
 'use client';
 import React from 'react';
 
+// ------------------ Adecuar navbar a tipos de usuario cuando ya esté hecha la autenticación 
+
 export default function NavBar() {
   return (
     <nav className="bg-gray-100">
@@ -25,7 +27,7 @@ export default function NavBar() {
                 href="#"
                 className="block py-2 px-3 rounded-sm hover:text-amber-400 md:p-0"
               >
-                Otra cosa
+                Crear artículo
               </a>
             </li>
           </ul>

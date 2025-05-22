@@ -1,9 +1,10 @@
 'use client';
 
+import { redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { IComment } from '@/types/comment';
 
-//Solo de ejemplo, luego dejar page vacío
+// ------------------- Solo de ejemplo, luego dejar page vacío
 
 export default function CommentsPage() {
   const [comments, setComments] = useState<IComment[]>([]);
@@ -49,6 +50,7 @@ export default function CommentsPage() {
   };
 
   useEffect(() => {
+    redirect('/home'); // Comentar para ver el funcionamiento de lo otro
     fetchComments();
   }, []);
 
