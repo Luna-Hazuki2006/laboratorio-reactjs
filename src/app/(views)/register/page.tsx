@@ -2,7 +2,7 @@ export default function Register() {
     return (
         <main>
             <h1 className="text-center">Registrar usuario</h1>
-            <div className="rounded-2xl border-2">
+            <div className="rounded-2xl border-2 ">
                 <form action="">
                     <label htmlFor="nombre_usuario">Nombre de usuario: </label>
                     <input type="text" name="nombre_usuario" id="nombre_usuario" required />
