@@ -33,6 +33,10 @@ export default function Article({ params }: ArticlePageProps) {
   }, [id]);
 
 
+  const handleNewComment = (newComment: IComment) => {
+    setComments((oldComments) => [newComment, ...oldComments]);
+  };
+
   if (loading) return <p>Cargando...</p>;
   if (!article) return <div>Artículo no encontrado.</div>;
 
@@ -46,7 +50,7 @@ export default function Article({ params }: ArticlePageProps) {
       <br/>
 
       <h2>Comentarios</h2>
-      <CommentForm articleId={id}/>
+      <CommentForm articleId={id} onNewComment={handleNewComment}/>
 
       {comments.length > 0 ? (
         comments.map(comment => <Comment key={comment._id} comment={comment} />)

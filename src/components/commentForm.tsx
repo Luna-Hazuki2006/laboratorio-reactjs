@@ -1,12 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+import { IComment } from '@/types/comment';
 
 interface CommentFormProps {
   articleId: string;
+  onNewComment: (comment: IComment) => void; // func en ts 
 }
 
-export default function CommentForm( {articleId} : CommentFormProps) {
+export default function CommentForm( {articleId, onNewComment} : CommentFormProps) {
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -22,7 +24,11 @@ export default function CommentForm( {articleId} : CommentFormProps) {
       });
 
       if (!res.ok) throw new Error('Error al enviar comentario');
+      
+      const data = await res.json();
+      onNewComment(data.data); // comentario en cuestión
       setContent('');
+
     } catch (err) {
       console.error(err);
     } finally {
