@@ -50,7 +50,7 @@ export default function CommentsPage() {
   };
 
   useEffect(() => {
-    redirect('/home'); // Comentar para ver el funcionamiento de lo otro
+    // redirect('/home'); // Comentar para ver el funcionamiento de lo otro
     fetchComments();
   }, []);
 
