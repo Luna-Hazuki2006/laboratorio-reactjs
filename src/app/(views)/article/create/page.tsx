@@ -53,6 +53,7 @@ export default function CreateArticlePage() {
         setMessage('Error: ' + data.message);
       }
     } catch (error) {
+      console.log('Error creando artículo', error);
       setMessage('Error al crear el articulo');
     } 
   };
