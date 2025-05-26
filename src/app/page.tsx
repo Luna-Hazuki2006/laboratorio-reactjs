@@ -64,7 +64,6 @@ export default function CommentsPage() {
     if (!user) redirect('/login') 
     else return (
         <main style={{ padding: '2rem' }}>
-
             <h1>Comments</h1>
             <div style={{ marginBottom: '1rem' }}>
                 <input

@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
+import { storeUser } from "@lib/cookies";
 
 export default function Login() {
     const router = useRouter()
@@ -12,6 +13,8 @@ export default function Login() {
         const formData = new FormData(event.currentTarget)
         const nombre_usuario = formData.get('nombre_usuario')
         const contraseña = formData.get('contraseña')
+        await storeUser(JSON.stringify({'nombre_usuario': nombre_usuario, 'contraseña': contraseña}))
+        router.push('/')
     }
 
     return (
