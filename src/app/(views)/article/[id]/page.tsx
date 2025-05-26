@@ -1,17 +1,17 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, use } from 'react';
 import { IArticle } from '@/types/article';
 import { IComment } from '@/types/comment';
 import Comment from '@components/comment';
 import CommentForm from '@components/commentForm';
 
 interface ArticlePageProps {
-  params: { id: string };
+  id: string;
 }
 
-export default function Article({ params }: ArticlePageProps) {
-  const { id } = params;
+export default function Article({ params }: { params: Promise<ArticlePageProps> }) {
+  const { id } = use(params);
   const [article, setArticle] = useState<IArticle | null>(null);
   const [comments, setComments] = useState<IComment[]>([]);
   const [loading, setLoading] = useState(true);

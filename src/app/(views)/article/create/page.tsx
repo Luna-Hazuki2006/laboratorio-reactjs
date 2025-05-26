@@ -15,12 +15,12 @@ export default function CreateArticlePage() {
         imgUrl: ''
     });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        });
-    }; 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+  }; 
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -37,25 +37,26 @@ export default function CreateArticlePage() {
 
             const data = await res.json();
 
-            if (data.success) {
-                setMessage('Articulo creado exitosamente');
-                setForm({
-                    title: '',
-                    content: '',
-                    source: '',
-                    category: '',
-                    date: '',
-                    namePublisher: '',
-                    idPublisher: '',
-                    imgUrl: ''
-                });
-            } else {
-                setMessage('Error: ' + data.message);
-            }
-        } catch (error) {
-            setMessage('Error al crear el articulo');
-        } 
-    };
+      if (data.success) {
+        setMessage('Articulo creado exitosamente');
+        setForm({
+          title: '',
+          content: '',
+          source: '',
+          category: '',
+          date: '',
+          namePublisher: '',
+          idPublisher: '',
+          imgUrl: ''
+        });
+      } else {
+        setMessage('Error: ' + data.message);
+      }
+    } catch (error) {
+      console.log('Error creando artículo', error);
+      setMessage('Error al crear el articulo');
+    } 
+  };
 
     return (
         <div>
