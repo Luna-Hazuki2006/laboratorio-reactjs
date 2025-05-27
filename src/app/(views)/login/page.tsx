@@ -1,25 +1,52 @@
 "use client"
 
 import { useRouter } from "next/navigation";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { storeUser } from "@lib/cookies";
 
 export default function Login() {
     const router = useRouter()
+    const [message, setMessage] = useState('')
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
-    
         const formData = new FormData(event.currentTarget)
-        const nombre_usuario = formData.get('nombre_usuario')
-        const contraseña = formData.get('contraseña')
-        await storeUser(JSON.stringify({'nombre_usuario': nombre_usuario, 'contraseña': contraseña}))
-        router.push('/')
+        const nombre_usuario = formData.get('nombre_usuario')?.toString()!
+        const contraseña = formData.get('contraseña')?.toString()!
+        try {
+            const res = await fetch('/api/user?' + new URLSearchParams({
+                username: nombre_usuario, 
+                password: contraseña
+            }), {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                // body: JSON.stringify({
+                //     username: nombre_usuario,
+                //     password: contraseña
+                // })
+            });
+
+            const data = await res.json();
+            if (data.success) {
+                console.log(data.data);
+                setMessage('Has iniciado sesión correctamente');
+                await storeUser(JSON.stringify(data.data))
+                router.push('/')
+            } else {
+                setMessage('Error: ' + data.message);
+            }
+        } catch (error) {
+            console.log('Error al iniciar sesión', error);
+            setMessage('Error al iniciar sesión');
+        } 
     }
 
     return (
         <main>
             <h1 className="text-center">Iniciar sesión</h1>
+            {message && <p>{message}</p>}
             <div className="rounded-2xl border-2 formulario">
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="nombre_usuario">Nombre de usuario: </label>

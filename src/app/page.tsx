@@ -14,6 +14,7 @@ export default function CommentsPage() {
     const [articleId, setArticleId] = useState('');
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState(true)
+    
 
     const fetchComments = async () => {
         setLoading(true);

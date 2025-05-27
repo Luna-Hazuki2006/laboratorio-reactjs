@@ -7,56 +7,56 @@ import Comment from '@components/comment';
 import CommentForm from '@components/commentForm';
 
 interface ArticlePageProps {
-  id: string;
+    id: string;
 }
 
 export default function Article({ params }: { params: Promise<ArticlePageProps> }) {
-  const { id } = use(params);
-  const [article, setArticle] = useState<IArticle | null>(null);
-  const [comments, setComments] = useState<IComment[]>([]);
-  const [loading, setLoading] = useState(true);
+    const { id } = use(params);
+    const [article, setArticle] = useState<IArticle | null>(null);
+    const [comments, setComments] = useState<IComment[]>([]);
+    const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const resArticle = await fetch(`/api/articles/${id}`);
-      const dataArticle = await resArticle.json();
-      setArticle(dataArticle.data);
+    useEffect(() => {
+        const fetchData = async () => {
+            const resArticle = await fetch(`/api/articles/${id}`);
+            const dataArticle = await resArticle.json();
+            setArticle(dataArticle.data);
 
-      const resComments = await fetch(`/api/comments?articleId=${id}`);
-      const dataComments = await resComments.json();
-      setComments(dataComments.data);
+            const resComments = await fetch(`/api/comments?articleId=${id}`);
+            const dataComments = await resComments.json();
+            setComments(dataComments.data);
 
-      setLoading(false);
+            setLoading(false);
+        };
+
+        fetchData();
+    }, [id]);
+
+
+    const handleNewComment = (newComment: IComment) => {
+        setComments((oldComments) => [newComment, ...oldComments]);
     };
 
-    fetchData();
-  }, [id]);
+    if (loading) return <p>Cargando...</p>;
+    if (!article) return <div>Artículo no encontrado.</div>;
 
+    return (
+        <div>
+            <h1>{article.title}</h1>
+            <p>Fuente: {article.source} | Categoría: {article.category}</p>
+            <p>{article.content}</p>
+            <p>Publicado por: {article.namePublisher}</p>
 
-  const handleNewComment = (newComment: IComment) => {
-    setComments((oldComments) => [newComment, ...oldComments]);
-  };
+            <br/>
 
-  if (loading) return <p>Cargando...</p>;
-  if (!article) return <div>Artículo no encontrado.</div>;
+            <h2>Comentarios</h2>
+            <CommentForm articleId={id} onNewComment={handleNewComment}/>
 
-  return (
-    <div>
-      <h1>{article.title}</h1>
-      <p>Fuente: {article.source} | Categoría: {article.category}</p>
-      <p>{article.content}</p>
-      <p>Publicado por: {article.namePublisher}</p>
-
-      <br/>
-
-      <h2>Comentarios</h2>
-      <CommentForm articleId={id} onNewComment={handleNewComment}/>
-
-      {comments.length > 0 ? (
-        comments.map(comment => <Comment key={comment._id} comment={comment} />)
-      ) : (
-        <p>No hay comentarios.</p>
-      )}
-    </div>
-  );
+            {comments.length > 0 ? (
+                comments.map(comment => <Comment key={comment._id} comment={comment} />)
+            ) : (
+                <p>No hay comentarios.</p>
+            )}
+        </div>
+    );
 }
