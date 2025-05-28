@@ -42,8 +42,8 @@ export default function Article({ params }: { params: Promise<ArticlePageProps> 
 
     useEffect(() => {
         async function buscar() {
-            const has = await hasUser()
-            setUser(has)
+            const has = await hasUser();
+            setUser(has);
 
             if(has){
                 const data = await getUser();
@@ -51,7 +51,7 @@ export default function Article({ params }: { params: Promise<ArticlePageProps> 
                 setUserData(dataObj);
             }
         }
-        buscar()
+        buscar();
     }, []);
 
 

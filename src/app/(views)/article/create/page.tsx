@@ -39,7 +39,9 @@ export default function CreateArticlePage() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(form)
+                body: JSON.stringify({...form,
+                idPublisher: userData?._id,
+                namePublisher: userData?.firstName,})
             });
 
             const data = await res.json();
@@ -102,9 +104,7 @@ export default function CreateArticlePage() {
                     <input name="source" placeholder="Fuente" value={form.source} onChange={handleChange} required />
                     <input name="category" placeholder="Categoria" value={form.category} onChange={handleChange} required />
                     <input name="date" type="date" placeholder="Fecha" value={form.date} onChange={handleChange} required />
-                    <input name="imgUrl" placeholder="URL de imagen (opcional)" value={form.imgUrl} onChange={handleChange} />
-                    <input name="namePublisher" placeholder="nombre autor (por motivos de prueba asi pero esto va del token cuando haya autenticacion (hola paula)" value={form.namePublisher} onChange={handleChange} required />
-                    <input name="idPublisher" placeholder="id autor (por motivos de prueba asi pero esto va del token cuando haya autenticacion (hola paula)" value={form.idPublisher} onChange={handleChange} required />
+                    <input name="imgUrl" placeholder="URL de imagen (opcional)" value={form.imgUrl} onChange={handleChange} />  
                     <button type="submit">Crear</button>
                 </form>
             </div>
