@@ -1,7 +1,10 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { DetailedHTMLProps, ReactEventHandler, SelectHTMLAttributes, useState } from 'react';
+import { useState, useEffect } from 'react';
+
+import { hasUser } from "@lib/cookies";
+import { redirect } from 'next/navigation';
 
 export default function Register() {
 
@@ -15,6 +18,7 @@ export default function Register() {
         dateOfBirth: ''
     }
 
+    const [user, setUser] = useState(true)
     const [message, setMessage] = useState('');
     const [form, setForm] = useState(empty_user);
     const router = useRouter()
@@ -69,7 +73,16 @@ export default function Register() {
         } 
     };
 
-    return (
+    useEffect(() => {
+        async function buscar() {
+            const has = await hasUser();
+            setUser(has);
+        }
+        buscar();
+    }, []);
+
+    if (user) redirect('/home');
+    else return (
         <main>
             <h1 className="text-center">Registrar usuario</h1>
             {message && <p>{message}</p>}

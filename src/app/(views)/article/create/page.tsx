@@ -1,9 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { hasUser, getUser } from "@lib/cookies";
+import { redirect } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { IUser } from '@/types/user';
+import Swal from 'sweetalert2'
+
 
 export default function CreateArticlePage() {
     const [message, setMessage] = useState('');
+    const [user, setUser] = useState(true)
+    const [userData, setUserData] = useState<IUser>();
     const [form, setForm] = useState({
         title: '',
         content: '',
@@ -32,7 +39,9 @@ export default function CreateArticlePage() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(form)
+                body: JSON.stringify({...form,
+                idPublisher: userData?._id,
+                namePublisher: userData?.firstName,})
             });
 
             const data = await res.json();
@@ -58,7 +67,33 @@ export default function CreateArticlePage() {
         } 
     };
 
-    return (
+    useEffect(() => {
+        async function buscar() {
+            const has = await hasUser();
+            setUser(has);
+
+            if(has){
+                const data = await getUser();
+                const dataObj: IUser = JSON.parse(data!);
+                setUserData(dataObj);
+            }
+        }
+
+        buscar();
+        }, []);
+
+    if (!user){
+        Swal.fire({
+            title: 'Inicia sesión para tener acceso.',
+            allowOutsideClick: false,
+        }).then((result)=>{if (result.isConfirmed) redirect('/login')});
+    } else if (userData?.userType != 'autor'){
+        Swal.fire({
+            title: 'No es un usuario autor.',
+            allowOutsideClick: false,
+        }).then((result)=>{if (result.isConfirmed) redirect('/home')});
+    } 
+    else return (
         <div>
             <h1>Crear Articulo</h1>
             {message && <p>{message}</p>}
@@ -69,9 +104,7 @@ export default function CreateArticlePage() {
                     <input name="source" placeholder="Fuente" value={form.source} onChange={handleChange} required />
                     <input name="category" placeholder="Categoria" value={form.category} onChange={handleChange} required />
                     <input name="date" type="date" placeholder="Fecha" value={form.date} onChange={handleChange} required />
-                    <input name="imgUrl" placeholder="URL de imagen (opcional)" value={form.imgUrl} onChange={handleChange} />
-                    <input name="namePublisher" placeholder="nombre autor (por motivos de prueba asi pero esto va del token cuando haya autenticacion (hola paula)" value={form.namePublisher} onChange={handleChange} required />
-                    <input name="idPublisher" placeholder="id autor (por motivos de prueba asi pero esto va del token cuando haya autenticacion (hola paula)" value={form.idPublisher} onChange={handleChange} required />
+                    <input name="imgUrl" placeholder="URL de imagen (opcional)" value={form.imgUrl} onChange={handleChange} />  
                     <button type="submit">Crear</button>
                 </form>
             </div>

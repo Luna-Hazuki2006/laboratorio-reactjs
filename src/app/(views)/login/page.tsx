@@ -1,12 +1,16 @@
 "use client"
 
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useEffect } from "react";
 import { storeUser } from "@lib/cookies";
+
+import { hasUser } from "@lib/cookies";
+import { redirect } from 'next/navigation';
 
 export default function Login() {
     const router = useRouter()
     const [message, setMessage] = useState('')
+    const [user, setUser] = useState(true)
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -43,7 +47,16 @@ export default function Login() {
         } 
     }
 
-    return (
+    useEffect(() => {
+        async function buscar() {
+            const has = await hasUser();
+            setUser(has);
+        }
+        buscar();
+    }, []);
+
+    if (user) redirect('/home');
+    else return (
         <main>
             <h1 className="text-center">Iniciar sesión</h1>
             {message && <p>{message}</p>}

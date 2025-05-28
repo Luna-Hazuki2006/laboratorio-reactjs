@@ -58,8 +58,8 @@ export default function CommentsPage() {
             setUser(data)
         }
         buscar()
-        // redirect('/home'); // Comentar para ver el funcionamiento de lo otro
-        fetchComments();
+        redirect('/home'); // home es home
+        //fetchComments();
     }, []);
     
     if (!user) redirect('/login') 
