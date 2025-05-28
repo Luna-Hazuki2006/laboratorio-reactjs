@@ -63,49 +63,50 @@ export default function CommentsPage() {
     }, []);
     
     if (!user) redirect('/login') 
-    else return (
-        <main style={{ padding: '2rem' }}>
-            <h1>Comments</h1>
-            <div style={{ marginBottom: '1rem' }}>
-                <input
-                    type="text"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                    placeholder="Content"
-                    style={{ padding: '0.5rem', marginBottom: '0.5rem', display: 'block' }}
-                />
-                <input
-                    type="text"
-                    value={publisherId}
-                    onChange={(e) => setPublisherId(e.target.value)}
-                    placeholder="Publisher ID"
-                    style={{ padding: '0.5rem', marginBottom: '0.5rem', display: 'block' }}
-                />
-                <input
-                    type="text"
-                    value={articleId}
-                    onChange={(e) => setArticleId(e.target.value)}
-                    placeholder="Article ID"
-                    style={{ padding: '0.5rem', marginBottom: '0.5rem', display: 'block' }}
-                />
-                <button onClick={handleSubmit} style={{ padding: '0.5rem' }}>
-                    Add Comment
-                </button>
-            </div>
+    else return redirect('/home')
+// (
+        // <main style={{ padding: '2rem' }}>
+        //     <h1>Comments</h1>
+        //     <div style={{ marginBottom: '1rem' }}>
+        //         <input
+        //             type="text"
+        //             value={content}
+        //             onChange={(e) => setContent(e.target.value)}
+        //             placeholder="Content"
+        //             style={{ padding: '0.5rem', marginBottom: '0.5rem', display: 'block' }}
+        //         />
+        //         <input
+        //             type="text"
+        //             value={publisherId}
+        //             onChange={(e) => setPublisherId(e.target.value)}
+        //             placeholder="Publisher ID"
+        //             style={{ padding: '0.5rem', marginBottom: '0.5rem', display: 'block' }}
+        //         />
+        //         <input
+        //             type="text"
+        //             value={articleId}
+        //             onChange={(e) => setArticleId(e.target.value)}
+        //             placeholder="Article ID"
+        //             style={{ padding: '0.5rem', marginBottom: '0.5rem', display: 'block' }}
+        //         />
+        //         <button onClick={handleSubmit} style={{ padding: '0.5rem' }}>
+        //             Add Comment
+        //         </button>
+        //     </div>
 
-            {loading ? (
-                <p>Loading...</p>
-            ) : comments.length === 0 ? (
-                <p>No comments yet.</p>
-            ) : (
-                <ul>
-                    {comments.map((comment, index) => (
-                        <li key={comment._id || index}>
-                                Publisher Id: {comment.publisherId}, Article Id: {comment.articleId}    Content:{comment.content}
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </main>
-    );
+        //     {loading ? (
+        //         <p>Loading...</p>
+        //     ) : comments.length === 0 ? (
+        //         <p>No comments yet.</p>
+        //     ) : (
+        //         <ul>
+        //             {comments.map((comment, index) => (
+        //                 <li key={comment._id || index}>
+        //                         Publisher Id: {comment.publisherId}, Article Id: {comment.articleId}    Content:{comment.content}
+        //                 </li>
+        //             ))}
+        //         </ul>
+        //     )}
+        // </main>
+    // );
 }

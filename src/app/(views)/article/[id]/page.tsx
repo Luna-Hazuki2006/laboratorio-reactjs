@@ -5,6 +5,7 @@ import { IArticle } from '@/types/article';
 import { IComment } from '@/types/comment';
 import Comment from '@components/comment';
 import CommentForm from '@components/commentForm';
+import Swal from 'sweetalert2';
 
 interface ArticlePageProps {
     id: string;
@@ -37,6 +38,15 @@ export default function Article({ params }: { params: Promise<ArticlePageProps> 
         setComments((oldComments) => [newComment, ...oldComments]);
     };
 
+    const ClickHandler = () => {
+        navigator.clipboard.writeText(location.href)
+        Swal.fire({
+            title: '¡Se copió la url correctamente!',
+            icon: 'success',
+            confirmButtonText: 'Vale'
+        })
+    }
+
     if (loading) return <p>Cargando...</p>;
     if (!article) return <div>Artículo no encontrado.</div>;
 
@@ -48,6 +58,10 @@ export default function Article({ params }: { params: Promise<ArticlePageProps> 
             <p>Publicado por: {article.namePublisher}</p>
 
             <br/>
+
+            <button onClick={ClickHandler} type="button">Copiar el artículo</button>
+
+            <br />
 
             <h2>Comentarios</h2>
             <CommentForm articleId={id} onNewComment={handleNewComment}/>
