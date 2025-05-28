@@ -58,12 +58,11 @@ export default function CommentsPage() {
             setUser(data)
         }
         buscar()
-        // redirect('/home'); // Comentar para ver el funcionamiento de lo otro
-        fetchComments();
+        redirect('/home'); // home es home
+        //fetchComments();
     }, []);
     
-    if (!user) redirect('/login') 
-    else return (
+    return (
         <main style={{ padding: '2rem' }}>
             <h1>Comments</h1>
             <div style={{ marginBottom: '1rem' }}>

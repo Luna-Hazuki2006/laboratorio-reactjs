@@ -1,9 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { hasUser, getUser } from "@lib/cookies";
+import { redirect } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { IUser } from '@/types/user';
+import Swal from 'sweetalert2'
+
 
 export default function CreateArticlePage() {
     const [message, setMessage] = useState('');
+    const [user, setUser] = useState(true)
+    const [userData, setUserData] = useState<IUser>();
     const [form, setForm] = useState({
         title: '',
         content: '',
@@ -58,7 +65,33 @@ export default function CreateArticlePage() {
         } 
     };
 
-    return (
+    useEffect(() => {
+        async function buscar() {
+            const has = await hasUser();
+            setUser(has);
+
+            if(has){
+                const data = await getUser();
+                const dataObj: IUser = JSON.parse(data!);
+                setUserData(dataObj);
+            }
+        }
+
+        buscar();
+        }, []);
+
+    if (!user){
+        Swal.fire({
+            title: 'Inicia sesión para tener acceso.',
+            allowOutsideClick: false,
+        }).then((result)=>{if (result.isConfirmed) redirect('/login')});
+    } else if (userData?.userType != 'autor'){
+        Swal.fire({
+            title: 'No es un usuario autor.',
+            allowOutsideClick: false,
+        }).then((result)=>{if (result.isConfirmed) redirect('/home')});
+    } 
+    else return (
         <div>
             <h1>Crear Articulo</h1>
             {message && <p>{message}</p>}

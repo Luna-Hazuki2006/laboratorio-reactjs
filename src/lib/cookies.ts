@@ -17,16 +17,16 @@ export async function storeUser(user: string) {
 }
 
 export async function getUser() {
-    const cookieStore = await cookies()
+    const cookieStore = await cookies();
     return cookieStore.get('user')?.value;
 }
 
 export async function hasUser() {
-    const cookieStore = await cookies()
+    const cookieStore = await cookies();
     return cookieStore.has('user')
 }
 
 export async function deleteUser() {
-    const cookieStore = await cookies()
-    cookieStore.delete('user')
+    const cookieStore = await cookies();
+    cookieStore.delete('user');
 }

@@ -2,13 +2,15 @@
 
 import { useState } from 'react';
 import { IComment } from '@/types/comment';
+import { IUser } from '@/types/user';
 
 interface CommentFormProps {
   articleId: string;
   onNewComment: (comment: IComment) => void; // func en ts 
+  userData: IUser;
 }
 
-export default function CommentForm( {articleId, onNewComment} : CommentFormProps) {
+export default function CommentForm( {articleId, onNewComment, userData} : CommentFormProps) {
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -20,7 +22,7 @@ export default function CommentForm( {articleId, onNewComment} : CommentFormProp
       const res = await fetch('/api/comments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content, publisherId:'informacion del token que espero esté pronto paula', publisherName:'informacion del token que espero esté pronto paula', articleId }),
+        body: JSON.stringify({ content, publisherId: userData._id, publisherName:userData.firstName, articleId }),
       });
 
       if (!res.ok) throw new Error('Error al enviar comentario');
