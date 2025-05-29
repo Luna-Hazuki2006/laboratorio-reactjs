@@ -68,12 +68,21 @@ export default function Article({ params }: { params: Promise<ArticlePageProps> 
             confirmButtonText: 'Vale'
         })
     }
+    useEffect(() => {
+        if (user === false) {
+            Swal.fire({
+            title: 'Inicia sesión para tener acceso a este artículo.',
+            allowOutsideClick: false,
+            }).then((result) => {
+            if (result.isConfirmed) redirect('/login');
+            });
+        }
+    }, [user]);
 
     if (loading) return <p>Cargando...</p>;
     if (!article) return <div>Artículo no encontrado.</div>;
 
-    if (!user) Swal.fire({ title: 'Inicia sesión para tener acceso a este artículo.', allowOutsideClick: false,}).then((result)=>{if (result.isConfirmed) redirect('/login')});
-
+    
     if (user) return (
         <div>
             <h1>{article.title}</h1>

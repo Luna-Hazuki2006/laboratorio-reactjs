@@ -8,6 +8,7 @@ import Swal from 'sweetalert2'
 
 
 export default function CreateArticlePage() {
+    const [mostrar, setMostrar] = useState(false);
     const [message, setMessage] = useState('');
     const [user, setUser] = useState(true)
     const [userData, setUserData] = useState<IUser>();
@@ -72,28 +73,41 @@ export default function CreateArticlePage() {
             const has = await hasUser();
             setUser(has);
 
-            if(has){
-                const data = await getUser();
-                const dataObj: IUser = JSON.parse(data!);
-                setUserData(dataObj);
+            if (!has) {
+                Swal.fire({
+                    title: 'Inicia sesión para tener acceso.',
+                    allowOutsideClick: false,
+                }).then(() => {
+                    redirect('/login');
+                });
+                return;
             }
+
+       
+            const data = await getUser();
+            const dataObj: IUser = JSON.parse(data!);
+            setUserData(dataObj);
+
+            if (dataObj.userType !== 'autor') {
+                Swal.fire({
+                    title: 'No es un usuario autor.',
+                    allowOutsideClick: false,
+                }).then(() => {
+                    redirect('/home');
+                });
+                return;
+            }
+
+            setMostrar(true);        
         }
 
         buscar();
         }, []);
 
-    if (!user){
-        Swal.fire({
-            title: 'Inicia sesión para tener acceso.',
-            allowOutsideClick: false,
-        }).then((result)=>{if (result.isConfirmed) redirect('/login')});
-    } else if (userData?.userType != 'autor'){
-        Swal.fire({
-            title: 'No es un usuario autor.',
-            allowOutsideClick: false,
-        }).then((result)=>{if (result.isConfirmed) redirect('/home')});
-    } 
-    else return (
+
+    if (!mostrar) return null;
+
+    return (
         <div>
             <h1>Crear Articulo</h1>
             {message && <p>{message}</p>}
