@@ -19,11 +19,11 @@ export default function Login() {
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
         const nombre_usuario = formData.get('nombre_usuario')?.toString()!
-        const contraseña = formData.get('contraseña')?.toString()!
+        const clave = formData.get('clave')?.toString()!
         try {
             const res = await fetch('/api/user?' + new URLSearchParams({
                 username: nombre_usuario, 
-                password: contraseña
+                password: clave
             }), {
                 method: 'GET',
                 headers: {
@@ -31,7 +31,7 @@ export default function Login() {
                 },
                 // body: JSON.stringify({
                 //     username: nombre_usuario,
-                //     password: contraseña
+                //     password: clave
                 // })
             });
 
@@ -68,8 +68,8 @@ export default function Login() {
                     <label htmlFor="nombre_usuario">Nombre de usuario: </label>
                     <input type="text" name="nombre_usuario" id="nombre_usuario" required />
                     <br />
-                    <label htmlFor="contraseña">Contraseña: </label>
-                    <input type="password" name="contraseña" id="contraseña" required />
+                    <label htmlFor="clave">clave: </label>
+                    <input type="password" name="clave" id="clave" required />
                     <br />
                     <div className="mr-auto ml-auto">
                         <button type="submit">Iniciar sesión</button>

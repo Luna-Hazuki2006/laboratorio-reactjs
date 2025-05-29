@@ -6,7 +6,7 @@ import { IUser } from '@/types/user';
 // Y aquí es donde las guardo en mongodb
 // ... Me tomó unos intentos poder acceder a los params :'v
 
-export async function GET(request: NextRequest, { params }: { params: Promise<{ username: string, password: string }> }) {
+export async function GET(request: Request, { params }: { params: Promise<{ username: string, password: string }> }) {
     const { username, password } = await params
     await dbConnect();
     // const { page, limit } = query;
