@@ -89,7 +89,7 @@ export default function Article({ params }: { params: Promise<ArticlePageProps> 
             <h1>{article.title}</h1>
             {
                 (article.imgUrl) ? 
-                (<Image src={article.imgUrl} alt={article.title} />)
+                (<img src={article.imgUrl} alt={article.title} />)
                 :
                 <></>
             }

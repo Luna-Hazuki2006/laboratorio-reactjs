@@ -66,7 +66,7 @@ export default function Home() {
                     <li key={article._id}>
                         {
                             (article.imgUrl) ?
-                            (<Image src={article.imgUrl} alt={article.title} />)
+                            (<img src={article.imgUrl} alt={article.title} />)
                             :
                             <></>
                         }
