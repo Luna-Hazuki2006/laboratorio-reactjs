@@ -7,8 +7,8 @@ import { IUser } from '@/types/user';
 // ... Me tomó unos intentos poder acceder a los params :'v
 
 export async function GET(request: NextRequest, { params }: { params: Promise<{ username: string, password: string }> }) {
-    await dbConnect();
     const { username, password } = await params
+    await dbConnect();
     // const { page, limit } = query;
     // const { username, password } = useParams()
     try {
