@@ -1,5 +1,6 @@
 'use client';
 import { deleteUser, getUser, hasUser } from '@lib/cookies';
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
@@ -7,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 
 export default function NavBar() {
 
-    const vacio = {
+    const [user, setUser] = useState({
         _id: '', 
         username: '', 
         firstName: '', 
@@ -17,35 +18,52 @@ export default function NavBar() {
         userType: '', 
         createdAt: '', 
         updatedAt: ''
-    }
-
-    const [user, setUser] = useState(vacio)
+    })
     const [has, setHas] = useState(false)
-
-    async function buscar() {
-        const verdad = await hasUser()
-        setHas(verdad)
-        if (verdad) {
-            const usuario = await getUser()
-            setUser(JSON.parse(usuario!))
-        } else {
-            setUser(vacio)
-            if (location.pathname != '/register') redirect('/login')
-        }
-    }
 
     // useEffect(() => {
     //     buscar()
     // }, [])
 
     useEffect(() => {
+        async function buscar() {
+            const verdad = await hasUser()
+            setHas(verdad)
+            if (verdad) {
+                const usuario = await getUser()
+                setUser(JSON.parse(usuario!))
+            } else {
+                setUser({
+                    _id: '', 
+                    username: '', 
+                    firstName: '', 
+                    lastName: '', 
+                    password: '', 
+                    dateOfBirth: '', 
+                    userType: '', 
+                    createdAt: '', 
+                    updatedAt: ''
+                })
+                if (location.pathname != '/register') redirect('/login')
+            }
+        }
         buscar()
     }, [has])
 
     const ClickHandler = async () => {
         await deleteUser()
         setHas(false)
-        setUser(vacio)
+        setUser({
+            _id: '', 
+            username: '', 
+            firstName: '', 
+            lastName: '', 
+            password: '', 
+            dateOfBirth: '', 
+            userType: '', 
+            createdAt: '', 
+            updatedAt: ''
+        })
         redirect('/login')
     }
 
@@ -75,12 +93,12 @@ export default function NavBar() {
                         {
                             (user['userType'] == 'autor') ? 
                             (<li>
-                                <a
+                                <Link
                                     href="/article/create"
                                     className="block py-2 px-3 rounded-sm hover:text-amber-400 md:p-0"
                                 >
                                     Crear artículo
-                                </a>
+                                </Link>
                             </li>)
                             : 
                             <></>

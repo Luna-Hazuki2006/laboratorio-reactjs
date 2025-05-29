@@ -1,9 +1,9 @@
 'use client';
 
 import { redirect } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { IComment } from '@/types/comment';
-import { hasUser } from "@lib/cookies";
+// import { hasUser } from "@lib/cookies";
 
 // ------------------- Solo de ejemplo, luego dejar page vacío
 

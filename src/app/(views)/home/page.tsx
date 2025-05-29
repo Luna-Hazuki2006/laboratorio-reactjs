@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { IArticle } from '@/types/article';
+import Image from 'next/image';
 
 export default function Home() {
     const [articles, setArticles] = useState<IArticle[]>([]);
@@ -26,16 +27,15 @@ export default function Home() {
         fetchArticles();
     }, []);
 
-    const handleFilter = () => {
-        const filteredArticles = articles.filter(article =>
-            article.category.toLowerCase().includes(filterCategory.toLowerCase())
-            && article.date.includes(filterDate)
-        );
-        setFiltered(filteredArticles);
-    };
-
     //watch los filtros
     useEffect(() => {
+        const handleFilter = () => {
+            const filteredArticles = articles.filter(article =>
+                article.category.toLowerCase().includes(filterCategory.toLowerCase())
+                && article.date.includes(filterDate)
+            );
+            setFiltered(filteredArticles);
+        };
         handleFilter();
     }, [filterCategory, filterDate]);
 
@@ -67,7 +67,7 @@ export default function Home() {
                     <li key={article._id}>
                         {
                             (article.imgUrl) ?
-                            (<img src={article.imgUrl} alt={article.title} />)
+                            (<Image src={article.imgUrl} alt={article.title} />)
                             :
                             <></>
                         }

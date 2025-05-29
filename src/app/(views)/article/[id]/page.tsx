@@ -11,6 +11,7 @@ import Swal from 'sweetalert2'
 import { hasUser, getUser } from "@lib/cookies";
 import { IUser } from '@/types/user';
 import { redirect } from 'next/navigation';
+import Image from 'next/image';
 
 interface ArticlePageProps {
     id: string;
@@ -88,7 +89,7 @@ export default function Article({ params }: { params: Promise<ArticlePageProps> 
             <h1>{article.title}</h1>
             {
                 (article.imgUrl) ? 
-                (<img src={article.imgUrl} alt={article.title} />)
+                (<Image src={article.imgUrl} alt={article.title} />)
                 :
                 <></>
             }
