@@ -12,18 +12,17 @@ export default function Home() {
     const [filterDate, setFilterDate] = useState('');
     const router = useRouter();
 
-    const fetchArticles = async () => {
-        try {
-            const res = await fetch('/api/articles');
-            const data = await res.json();
-            setArticles(data.data);
-            setFiltered(data.data);
-        } catch (error) {
-            console.error('Error al obtener artículos:', error);
-        }
-    };
-
     useEffect(() => {
+        const fetchArticles = async () => {
+            try {
+                const res = await fetch('/api/articles');
+                const data = await res.json();
+                setArticles(data.data);
+                setFiltered(data.data);
+            } catch (error) {
+                console.error('Error al obtener artículos:', error);
+            }
+        };
         fetchArticles();
     }, []);
 
