@@ -6,23 +6,6 @@ import { IUser } from '@/types/user';
 // Y aquí es donde las guardo en mongodb
 // ... Me tomó unos intentos poder acceder a los params :'v
 
-export async function GET(request: NextRequest, { params }: { params: Promise<{ username: string, password: string }> }, res : NextResponse) {
-    const { username, password } = await params
-    console.log(username);
-    console.log(password);
-    
-    await dbConnect();
-    // const { page, limit } = query;
-    // const { username, password } = useParams()
-    try {
-        const user: IUser[] = await User.find({'username': username, 'password': btoa(password as string)}); 
-        if (user.length == 0) return NextResponse.json({ success: false, message: "El usuario no existe" },{ status: 400 });
-        return NextResponse.json({ success: true, data: user[0] }, { status: 200 });
-    } catch (error: unknown) {
-        return NextResponse.json({ success: false, message: (error as Error).message || "Error unknown" },{ status: 400 });
-    }
-}
-
 export async function POST(request: NextRequest) {
     await dbConnect();
     try {

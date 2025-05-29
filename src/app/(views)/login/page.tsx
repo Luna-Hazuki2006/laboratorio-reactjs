@@ -21,18 +21,15 @@ export default function Login() {
         const nombre_usuario = formData.get('nombre_usuario')?.toString()!
         const clave = formData.get('clave')?.toString()!
         try {
-            const res = await fetch('/api/user/?' + new URLSearchParams({
-                username: nombre_usuario, 
-                password: clave
-            }), {
-                method: 'GET',
+            const res = await fetch('/api/login/', {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                // body: JSON.stringify({
-                //     username: nombre_usuario,
-                //     password: clave
-                // })
+                body: JSON.stringify({
+                    username: nombre_usuario,
+                    password: clave
+                })
             });
 
             const data = await res.json();
