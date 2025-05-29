@@ -21,7 +21,7 @@ export default function Login() {
         const nombre_usuario = formData.get('nombre_usuario')?.toString()!
         const clave = formData.get('clave')?.toString()!
         try {
-            const res = await fetch('/api/user?' + new URLSearchParams({
+            const res = await fetch('/api/user/?' + new URLSearchParams({
                 username: nombre_usuario, 
                 password: clave
             }), {
