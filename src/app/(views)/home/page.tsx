@@ -7,7 +7,8 @@ import { IArticle } from '@/types/article';
 export default function Home() {
   const [articles, setArticles] = useState<IArticle[]>([]);
   const [filtered, setFiltered] = useState<IArticle[]>([]);
-  const [filter, setFilter] = useState('');
+  const [filterCategory, setFilterCategory] = useState('');
+  const [filterDate, setFilterDate] = useState('');
   const router = useRouter();
 
   const fetchArticles = async () => {
@@ -25,14 +26,18 @@ export default function Home() {
     fetchArticles();
   }, []);
 
-  const handleFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.toLowerCase();
-    setFilter(value);
+  const handleFilter = () => {
     const filteredArticles = articles.filter(article =>
-      article.category.toLowerCase().includes(value)
+      article.category.toLowerCase().includes(filterCategory.toLowerCase())
+      && article.date.includes(filterDate)
     );
     setFiltered(filteredArticles);
   };
+
+  //watch los filtros
+  useEffect(() => {
+    handleFilter();
+  }, [filterCategory, filterDate]);
 
   const handleClickArticle = (id: string) => {
     router.push(`/article/${id}`);
@@ -45,8 +50,15 @@ export default function Home() {
       <input
         type="text"
         placeholder="Filtrar por categoría"
-        value={filter}
-        onChange={handleFilter}
+        value={filterCategory}
+        onChange={(e) => setFilterCategory(e.target.value)}
+      />
+
+      <input
+        type="date"
+        placeholder="Filtrar por fecha"
+        value={filterDate}
+        onChange={(e) => setFilterDate(e.target.value)}
       />
 
       <ul>
