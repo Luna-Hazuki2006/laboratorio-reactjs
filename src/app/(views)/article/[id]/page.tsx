@@ -86,6 +86,12 @@ export default function Article({ params }: { params: Promise<ArticlePageProps> 
     if (user) return (
         <div>
             <h1>{article.title}</h1>
+            {
+                (article.imgUrl) ? 
+                (<img src={article.imgUrl} alt={article.title} />)
+                :
+                <></>
+            }
             <p>Fuente: {article.source} | Categoría: {article.category}</p>
             <p>{article.content}</p>
             <p>Publicado por: {article.namePublisher}</p>

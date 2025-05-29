@@ -65,6 +65,12 @@ export default function Home() {
             <ul>
                 {filtered.map(article => (
                     <li key={article._id}>
+                        {
+                            (article.imgUrl) ?
+                            (<img src={article.imgUrl} alt={article.title} />)
+                            :
+                            <></>
+                        }
                         <h2>{article.title}</h2>
                         <p>{article.category}</p>
                         <button onClick={() => handleClickArticle(article._id)}>Leer artículo</button>
