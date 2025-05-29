@@ -64,11 +64,12 @@ button:hover {
 
 .formulario a {
     text-decoration-line: underline;
+    animation: coloreado 5s linear 0s infinite normal both;
 }
 
-.formulario a:hover {
-    animation: coloreado 3s linear 0s infinite normal both;
-}
+/* .formulario a:hover {
+    
+} */
 
 .contenido {
     padding: 2%;
