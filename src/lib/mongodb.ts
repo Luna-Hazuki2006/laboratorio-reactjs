@@ -4,12 +4,18 @@ declare global {
     var mongoose: any;
 }
 
+// ¿Qué le parece todo?
+// Ok
+// Gracias :3
+
 let cached = global.mongoose;
 
 if (!cached) {
     cached = global.mongoose = { conn: null, promise: null };
 }
-
+// Aquí
+// Si, el mío, y también estoy también usamos las variables de entorno
+// Para más seguridad
 async function dbConnect() {
     const MONGODB_URI = process.env.NEXT_PUBLIC_MONGODB_URI!;
     

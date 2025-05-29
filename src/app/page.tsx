@@ -52,18 +52,19 @@ export default function CommentsPage() {
         }
     };
 
-    useEffect(() => {
-        async function buscar() {
-            const data = await hasUser()
-            setUser(data)
-        }
-        buscar()
-        redirect('/home'); // home es home
-        //fetchComments();
-    }, []);
+    // useEffect(() => {
+    //     async function buscar() {
+    //         const data = await hasUser()
+    //         setUser(data)
+    //     }
+    //     buscar()
+    //     // redirect('/home'); // home es home
+    //     //fetchComments();
+    // }, []);
     
-    if (!user) redirect('/login') 
-    else return redirect('/home')
+    // if (!user) redirect('/login') 
+    // else 
+    return redirect('/home')
 // (
         // <main style={{ padding: '2rem' }}>
         //     <h1>Comments</h1>

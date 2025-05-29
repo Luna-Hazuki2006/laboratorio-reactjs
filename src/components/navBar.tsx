@@ -54,7 +54,12 @@ export default function NavBar() {
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="" className="flex items-center">
                     <span className="self-center text-2xl font-semibold whitespace-nowrap ">
-                        Buenas, {user['firstName']} {user['lastName']}
+                        {
+                        (has) ?
+                        `Buenas, ${user['firstName']} ${user['lastName']}`
+                        : 
+                        "Bienvenido a noticias"
+                        }
                     </span>
                 </a>
                 <div className="hidden w-full md:block md:w-auto">

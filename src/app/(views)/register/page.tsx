@@ -73,16 +73,16 @@ export default function Register() {
         } 
     };
 
-    useEffect(() => {
-        async function buscar() {
-            const has = await hasUser();
-            setUser(has);
-        }
-        buscar();
-    }, []);
+    // useEffect(() => {
+    //     async function buscar() {
+    //         const has = await hasUser();
+    //         setUser(has);
+    //     }
+    //     buscar();
+    // }, []);
 
-    if (user) redirect('/home');
-    else return (
+    // if (user) redirect('/home');
+    return (
         <main>
             <h1 className="text-center">Registrar usuario</h1>
             {message && <p>{message}</p>}
@@ -111,9 +111,13 @@ export default function Register() {
                         <option value="autor">Autor</option>
                     </select>
                     <br />
-                    <button type="submit">Registrar</button>
+                    <div>
+                        <button type="submit">Registrar</button>
+                    </div>
                 </form>
-                <a href="/login">¿Ya tienes cuenta? ¡Inicia sesión!</a>
+                <div>
+                    <a href="/login">¿Ya tienes cuenta? ¡Inicia sesión!</a>
+                </div>
             </div>
         </main>
     )

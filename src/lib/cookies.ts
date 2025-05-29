@@ -2,6 +2,8 @@
 
 import { cookies } from 'next/headers'
 
+// Aquí es donde hago las cookies
+// Si
 export async function storeUser(user: string) {
     const cookieStore = await cookies()
     cookieStore.set({

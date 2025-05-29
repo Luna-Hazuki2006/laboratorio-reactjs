@@ -11,7 +11,10 @@ export default function Login() {
     const router = useRouter()
     const [message, setMessage] = useState('')
     const [user, setUser] = useState(true)
-
+// ¿Qué tal?
+// Profe, la función de abajo fue la que usted me ayudó :D
+// Si
+// Esto se usa para guardar el usuario en las cookies
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
@@ -55,8 +58,8 @@ export default function Login() {
         buscar();
     }, []);
 
-    if (user) redirect('/home');
-    else return (
+    // if (user) redirect('/home');
+    return (
         <main>
             <h1 className="text-center">Iniciar sesión</h1>
             {message && <p>{message}</p>}
@@ -72,7 +75,9 @@ export default function Login() {
                         <button type="submit">Iniciar sesión</button>
                     </div>
                 </form>
-                <a href="/register">¿No tienes cuenta? ¡Regístrate!</a>
+                <div>
+                    <a href="/register">¿No tienes cuenta? ¡Regístrate!</a>
+                </div>
             </div>
         </main>
     )

@@ -105,7 +105,9 @@ export default function CreateArticlePage() {
                     <input name="category" placeholder="Categoria" value={form.category} onChange={handleChange} required />
                     <input name="date" type="date" placeholder="Fecha" value={form.date} onChange={handleChange} required />
                     <input name="imgUrl" placeholder="URL de imagen (opcional)" value={form.imgUrl} onChange={handleChange} />  
-                    <button type="submit">Crear</button>
+                    <div>
+                        <button type="submit">Crear</button>
+                    </div>
                 </form>
             </div>
         </div>

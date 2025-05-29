@@ -3,6 +3,9 @@ import dbConnect from '@lib/mongodb';
 import User from '@models/user';
 import { IUser } from '@/types/user';
 
+// Y aquí es donde las guardo en mongodb
+// ... Me tomó unos intentos poder acceder a los params :'v
+
 export async function GET(req : NextRequest, res : NextResponse) {
     await dbConnect();
     const username = req.nextUrl.searchParams.get('username');
