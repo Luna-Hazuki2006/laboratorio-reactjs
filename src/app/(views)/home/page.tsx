@@ -44,11 +44,11 @@ export default function Home() {
 
     return (
         <div>
-            <h1>Home</h1>
+            <h1>Artículos más recientes de Noticias<sup>TM</sup></h1>
             <input
             className='mb-3'
                 type="text"
-                placeholder="Filtrar por categoría"
+                placeholder="Filtrar por categoría. Ejemplo: zoología"
                 value={filterCategory}
                 onChange={(e) => setFilterCategory(e.target.value)}
             />
@@ -64,15 +64,28 @@ export default function Home() {
             <ul>
                 {filtered.map(article => (
                     <li key={article._id}>
-                        {
-                            (article.imgUrl) ?
-                            (<img src={article.imgUrl} alt={article.title} />)
-                            :
-                            <></>
-                        }
-                        <h2>{article.title}</h2>
-                        <p>{article.category}</p>
-                        <button onClick={() => handleClickArticle(article._id)}>Leer artículo</button>
+                        <div className='articulos'>
+                            {
+                                (article.imgUrl) ?
+                                (
+                                    <div>
+                                        <img src={article.imgUrl} alt={article.title} />
+                                    </div>
+                                )
+                                :
+                                <></>
+                            }
+                            <h2><b>{article.title}</b></h2>
+                            <p>{
+                                (article.content.length > 50) ? 
+                                article.content.substring(0, 50) 
+                                : 
+                                article.content
+                            }</p>
+                            <p>Categorías: {article.category}</p>
+                            <p>Fecha de la noticia: {article.date}</p>
+                            <button onClick={() => handleClickArticle(article._id)}>Leer artículo</button>
+                        </div>
                     </li>
                 ))}
             </ul>

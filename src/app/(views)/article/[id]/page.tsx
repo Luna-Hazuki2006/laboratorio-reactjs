@@ -87,23 +87,26 @@ export default function Article({ params }: { params: Promise<ArticlePageProps> 
     if (user) return (
         <div>
             <h1>{article.title}</h1>
+            <small>Categorías: {article.category}</small>
             {
                 (article.imgUrl) ? 
-                (<img src={article.imgUrl} alt={article.title} />)
+                (<img className='mr-auto ml-auto' src={article.imgUrl} alt={article.title} />)
                 :
                 <></>
             }
-            <p>Fuente: {article.source} | Categoría: {article.category}</p>
+            <p className='text-right'><small>Fecha: {article.date}</small></p> 
             <p>{article.content}</p>
-            <p>Publicado por: {article.namePublisher}</p>
+            <p><small>Fuentes: {article.source}</small></p>
+            <p><small>Publicado por: {article.namePublisher}</small></p>
 
             <br/>
 
-            <button onClick={ClickHandler} type="button">Copiar el artículo</button>
+            <button className='mb-2' onClick={ClickHandler} type="button">Copiar el artículo</button>
 
             <br />
+            <hr />
 
-            <h2>Comentarios</h2>
+            <h2 className='mt-6'>Comentarios ({comments.length})</h2>
 
             { userData?.userType === "lector" ? 
             <CommentForm articleId={id} onNewComment={handleNewComment} userData={userData}/>

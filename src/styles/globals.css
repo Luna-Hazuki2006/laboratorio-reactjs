@@ -41,9 +41,14 @@ button {
 
 h1 {
     /* margin-top: 5px; */
+    text-align: center;
     margin-bottom: 10px;
     font-size: x-large;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h2 {
+    font-size: large;
 }
 
 button:hover {
@@ -60,6 +65,7 @@ button:hover {
 .formulario div {
     text-align: center;
     margin: 5px;
+
 }
 
 .formulario a {
@@ -77,6 +83,44 @@ button:hover {
 
 .contenido button {
     background-color: cadetblue;
+}
+
+.articulos {
+    /* display: flex; */
+    /* text-align: center; */
+    border: 1px groove black;
+    border-radius: 5px;
+    padding: 2%;
+    margin: 2%;
+    overflow: auto;
+}
+
+.articulos img {
+    float: inline-start;
+    width: 30%;
+    margin-right: 1%;
+    padding: 1%;
+}
+
+.comentario {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 3%;
+    padding: 1%;
+}
+
+.creacion {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 1%;
+}
+
+.creacion * {
+    margin: 1%;
+}
+
+.creacion div {
+    text-align: center;
 }
 
 @keyframes coloreado {

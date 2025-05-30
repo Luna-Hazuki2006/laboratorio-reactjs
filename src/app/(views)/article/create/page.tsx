@@ -59,6 +59,10 @@ export default function CreateArticlePage() {
                 idPublisher: '',
                 imgUrl: ''
             });
+            Swal.fire({
+                title: 'El artículo ha sido creado exitósamente.',
+                icon: 'success'
+            })
         } else {
             setMessage('Error: ' + data.message);
         }
@@ -109,15 +113,21 @@ export default function CreateArticlePage() {
 
     return (
         <div>
-            <h1>Crear Articulo</h1>
+            <h1>Crear artículo</h1>
             {message && <p>{message}</p>}
-            <div className='formulario'>
+            <div className='creacion'>
                 <form onSubmit={handleSubmit}>
+                    <label htmlFor="title">Título: </label>
                     <input name="title" placeholder="Titulo" value={form.title} onChange={handleChange} required />
+                    <label htmlFor="content">Contenido: </label>
                     <textarea name="content" placeholder="Contenido" value={form.content} onChange={handleChange} required />
-                    <input name="source" placeholder="Fuente" value={form.source} onChange={handleChange} required />
-                    <input name="category" placeholder="Categoria" value={form.category} onChange={handleChange} required />
+                    <label htmlFor="source">Fuentes: </label>
+                    <input name="source" placeholder="Fuentes" value={form.source} onChange={handleChange} required />
+                    <label htmlFor="category">Categorías: </label>
+                    <input name="category" placeholder="Categorías" value={form.category} onChange={handleChange} required />
+                    <label htmlFor="date">Fecha de suceso: </label>
                     <input name="date" type="date" placeholder="Fecha" value={form.date} onChange={handleChange} required />
+                    <label htmlFor="imgUrl">Imagen (opcional): </label>
                     <input name="imgUrl" placeholder="URL de imagen (opcional)" value={form.imgUrl} onChange={handleChange} />  
                     <div>
                         <button type="submit">Crear</button>
